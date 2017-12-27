@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.slcf.dao.UserDao">
+
+<resultMap type="com.slcf.pojo.UserBean" id="UserBeanResult"></resultMap>
+
+<select id="getUserListByCon" parameterType="map" resultMap="UserBeanResult">
+SELECT u.*,d.dept_name from tb_user u  left join tb_dept d  on u.dept_id=d.dept_id
+<where>
+<if test="userId!=0 ">
+and user_id=#{userId}
+</if>
+<if test="userName!='values'">
+and user_name like concat(concat('%',#{userName}),'%')
+</if>
+<if test="deptId!=0">
+ and u.dept_id=#{deptId}
+</if>
+</where>
+limit #{spage},#{epage}
+</select>
+
+
+<select id="getContByCon" parameterType="map"	resultType="Integer">
+select count(1) from tb_user u left join tb_dept d on u.dept_id=d.dept_id  
+<where>
+<if test="userId!=0 ">
+and user_id=#{userId}
+</if>
+<if test="userName!='values'">
+and user_name like concat(concat('%',#{userName}),'%')
+</if>
+<if test="deptId!=0">
+and u.dept_id=#{deptId}
+</if>
+</where>
+</select>
+</mapper>

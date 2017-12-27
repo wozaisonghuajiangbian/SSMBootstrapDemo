@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>时间</title>
+	
+</head>
+<body >
+	<span id="did"></span>
+</body>
+</html>
+<script type="text/javascript">
+//定义函数
+function getdaytime(){
+
+//定义日期对象
+var mydate=new Date();
+
+// 获取年份
+var year=mydate.getFullYear();
+
+// 获取月份
+var month=mydate.getMonth()+1;
+
+// 获取一个月中的每一天
+var date=mydate.getDate();
+// alert(date);
+//获取小时
+var hour=mydate.getHours();
+if(hour<10){
+	hour="0"+hour;
+}
+
+// 获取分钟
+var minute=mydate.getMinutes();
+if(minute<10){
+	minute="0"+minute;
+}
+
+// 获取秒钟
+var second=mydate.getSeconds();
+if(second<10){
+	second="0"+second;
+}
+
+// 获取一周的某一天
+var day=mydate.getDay();
+// alert("day:"+day)
+// 定义星期的一维数组  在外国0代表星期天
+var weeks=['星期天','星期一','星期二','星期三','星期四','星期五','星期六']
+
+var myday=year+"年"+month+"月"+date+"日"+hour+":"+minute+":"+second+weeks[day];
+
+// 向div输出时间日期
+document.getElementById("did").innerText=myday;
+
+// 启动定时器
+setTimeout("getdaytime()",1000);
+
+
+}
+// 定时器
+// sttInterval("getdaytime()",1000);
+
+// 调用函数
+getdaytime();
+
+
+	</script>
